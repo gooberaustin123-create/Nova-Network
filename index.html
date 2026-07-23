@@ -117,3 +117,10 @@
     async function loadGames() {
       const response = await fetch("https://api.github.com/repos/bubbls/ugss/contents/");
       const
+
+
+      function showSection(id) {
+  document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === "games") loadGames(); // dynamically load games when you open Games
+}
