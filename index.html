@@ -1,129 +1,140 @@
 <!DOCTYPE html>
+<html>
+<head>
+  <title>NOVA NETWORK</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #2b0000, #0a0000);
+      font-family: Arial, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
 
+    /* Glowing particle background */
+    .particles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,0,150,0.4) 2px, transparent 2px),
+                        radial-gradient(circle, rgba(255,0,150,0.3) 2px, transparent 2px),
+                        radial-gradient(circle, rgba(255,0,150,0.2) 2px, transparent 2px);
+      background-size: 120px 120px, 200px 200px, 160px 160px;
+      animation: drift 20s linear infinite;
+    }
 
-<!-- Ultimate Game Stash file--> 
-<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+    @keyframes drift {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-200px); }
+    }
 
+    #container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin-top: 80px;
+    }
 
-  <head> 
-    <script>
-      window.gameconfig = {
-        name: "Mario Party (USA)",
-        url: "https://cdn.jsdelivr.net/gh/bubbls/ugss@bedc66a398d9078f30471e9255aa188f79f9d611/Mario%20Party%20(USA)/Mario%20Party%20(USA).z64",
-        core: "n64",
-        min: 1,
-        max: 2,
-      };
-    </script>
-    <script>
-      function mergeFiles(fileParts, cb) {
-        return new Promise((resolve, reject) => {
-          let buffers = [];
-          function fetchPart(index) {
-            if (index >= fileParts.length) {
-              let mergedBlob = new Blob(buffers);
-              let mergedFileUrl = URL.createObjectURL(mergedBlob);
-              resolve(mergedFileUrl);
-              return;
-            }
-            fetch(fileParts[index])
-              .then((response) => response.arrayBuffer())
-              .then((data) => {
-                buffers.push(data);
-                fetchPart(index + 1);
-              })
-              .catch(reject);
-            cb(index);
-          }
-          fetchPart(0);
-        });
-      }
-      function getParts(file, start, end) {
-        let parts = [];
-        for (let i = start; i <= end; i++) {
-          let padded = String(i).padStart((end+"").length, '0');
-          parts.push(file + ".part" + padded);
-        }
-        return parts;
-      }
-getParts("asd.js", 0, 100)
-    </script>
-    <style>
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        background-color: #121212;
-        color: white;
-        font-family: Arial, sans-serif;
-      }
-      #game-container {
-        text-align: center;
-        width: 100%;
-        height: 100%;
-      }
-      #loading-progress {
-        font-size: 18px;
-        margin-top: 20px;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        display: inline-block;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="game-container">
-      <div id="game"></div>
-      <div id="loading-progress">Loading: 0/0</div>
-      <div id="first-time">First-time loading may take longer...</div>
+    #title {
+      font-size: 48px;
+      font-weight: bold;
+      color: #ff7a00;
+      text-shadow: 0 0 20px #ff4500;
+      margin-bottom: 10px;
+    }
+
+    #tagline {
+      font-size: 18px;
+      opacity: 0.8;
+      margin-bottom: 40px;
+    }
+
+    #search-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    #search-input {
+      width: 350px;
+      padding: 12px;
+      border-radius: 6px 0 0 6px;
+      border: none;
+      outline: none;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 16px;
+    }
+
+    #search-btn {
+      padding: 12px 20px;
+      background: #ff0000;
+      border: none;
+      border-radius: 0 6px 6px 0;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .tile-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .tile {
+      width: 160px;
+      height: 100px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .tile:hover {
+      background: rgba(255,255,255,0.15);
+      transform: scale(1.05);
+    }
+
+    .tile-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="particles"></div>
+
+  <div id="container">
+    <div id="title">NOVA NETWORK</div>
+    <div id="tagline">Browse Free — No Limits</div>
+
+    <div id="search-box">
+      <input id="search-input" placeholder="Search or type a URL...">
+      <button id="search-btn">GO</button>
     </div>
-    <script>
-      var parts = getParts(
-        window.gameconfig.url,
-        window.gameconfig.min,
-        window.gameconfig.max
-      );
-      var totalParts = parts.length;
 
-      function updateLoadingProgress(loaded) {
-        const progressElement = document.getElementById("loading-progress");
-        if (loaded === 0) {
-          progressElement.textContent = "Loading: 0/0";
-        } else {
-          progressElement.textContent = `Loading: ${loaded}/${totalParts}`;
-        }
-      }
+    <div class="tile-container">
+      <div class="tile">
+        <div class="tile-icon">🎮</div>
+        <div>Games</div>
+      </div>
 
-      Promise.all([mergeFiles(parts, updateLoadingProgress)])
-        .then(([gameUrl]) => {
-          document.getElementById("loading-progress").remove();
-          document.getElementById("first-time").remove();
-          EJS_player = "#game";
-          EJS_core = window.gameconfig.core;
-          EJS_gameName = window.gameconfig.name;
-          EJS_color = "#0064ff";
-          EJS_startOnLoaded = true;
-          EJS_pathtodata = "https://cdn.jsdelivr.net/gh/bubblfan/emu@master/";
-          EJS_gameUrl = gameUrl;
-          EJS_defaultOptions = {
-        vsync: "disabled"
-}
-          const script = document.createElement("script");
-          script.src =
-            "https://cdn.jsdelivr.net/gh/bubblfan/emu@master/loader.js";
-          document.body.appendChild(script);
-        })
-        .catch((error) => {
-          console.error(error);
-          document.getElementById("loading-progress").textContent =
-            "Error loading game.";
-        });
-    </script>
-  </body>
-</html>  
+      <div class="tile">
+        <div class="tile-icon">⚙️</div>
+        <div>Add-ons</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
