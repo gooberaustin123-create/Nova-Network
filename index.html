@@ -3,7 +3,7 @@
 <head>
   <title>NOVA NETWORK</title>
   <style>
-    body, html { margin:0; padding:0; width:100%; height:100%; font-family:Arial,sans-serif; color:white; overflow:hidden; }
+    body, html { margin:0; padding:0; width:100%; height:100%; font-family:Arial,sans-serif; color:white; }
     /* Themes */
     body.nebula { background: radial-gradient(circle at center, #2b0000, #0a0000); }
     body.ocean { background: linear-gradient(to bottom, #001f3f, #0074D9); }
@@ -21,12 +21,10 @@
     body.dots { background-image: radial-gradient(circle, #444 2px, transparent 2px); background-size:40px 40px; }
     body.lines { background-image: linear-gradient(#444 1px, transparent 1px); background-size:40px 40px; }
 
-    /* Settings panel */
     #settings { position:fixed; top:10px; left:10px; background:rgba(0,0,0,0.7); padding:15px; border-radius:8px; z-index:10; width:200px; }
     #settings h3 { margin:0 0 10px; font-size:16px; }
     #settings select { width:100%; margin-bottom:10px; }
 
-    /* Home */
     #container { text-align:center; padding-top:60px; }
     #title { font-size:48px; font-weight:bold; color:#ff7a00; text-shadow:0 0 20px #ff4500; }
     #tagline { font-size:18px; opacity:0.8; margin-bottom:30px; }
@@ -37,17 +35,14 @@
     .tile:hover { background:rgba(255,255,255,0.15); transform:scale(1.05); }
     .tile-icon { font-size:28px; margin-bottom:8px; }
 
-    /* Sections */
     .section { display:none; padding:20px; }
     .active { display:block; }
 
-    /* Games */
     .game-list { list-style:none; padding:0; }
     .game-list li { padding:10px; margin:5px; background:rgba(255,255,255,0.05); border-radius:6px; cursor:pointer; }
     .game-list li:hover { background:rgba(255,255,255,0.15); }
     iframe { width:100%; height:500px; border:none; margin-top:20px; }
 
-    /* Add-ons */
     .addon-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
     .addon { background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; }
     .addon h3 { margin:0 0 10px; }
@@ -119,4 +114,14 @@
     // Section switching
     function showSection(id) {
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Game loader
+    function loadGame(name) {
+      // Replace emulator.html with your actual emulator loader page
+      document.getElementById('gameFrame').src = "emulator.html?game=" + encodeURIComponent(name);
+    }
+
+    // Theme switching
+    document.getElementById('themeSelect').addEventListener('change', function() {
