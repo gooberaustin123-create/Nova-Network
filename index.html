@@ -1,9 +1,35 @@
 <h1>Nova Network</h1>
 
-<ul>
-  <li><a href="clmarioparty.html" target="game-frame">Mario Party</a></li>
-  <li><a href="Bank Robbery.html" target="game-frame">Bank Robbery</a></li>
-  <li><a href="cheeserolling.html" target="game-frame">Cheese Rolling</a></li>
-</ul>
+<ul id="game-list">
+  </ul>
 
-<iframe name="game-frame" Width="800" height="600" ></iframe>
+<iframe name="game-frame" width="800" height="600"></iframe>
+
+<script>
+  const username = 'gooberaustin123-create';
+  const repo = 'Nova-Network';
+
+  fetch(`https://api.github.com/repos/${username}/${repo}/contents/`)
+    .then(response => response.json())
+    .then(files => {
+      const list = document.getElementById('game-list');
+
+      files.forEach(file => {
+        // Only include .html files and exclude index.html
+        if (file.name.endsWith('.html') && file.name.toLowerCase() !== 'index.html') {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          
+          a.href = file.name;
+          a.target = 'game-frame';
+          
+          // Cleans up the filename for display (removes .html extension)
+          a.textContent = file.name.replace('.html', '');
+
+          li.appendChild(a);
+          list.appendChild(li);
+        }
+      });
+    })
+    .catch(err => console.error('Error loading game list:', err));
+</script>
