@@ -3,15 +3,7 @@
 <head>
   <title>NOVA NETWORK</title>
   <style>
-    body, html {
-      margin: 0; padding: 0;
-      width: 100%; height: 100%;
-      font-family: Arial, sans-serif;
-      color: white;
-      overflow: hidden;
-    }
-
-    /* THEMES */
+    body, html { margin:0; padding:0; width:100%; height:100%; font-family:Arial,sans-serif; color:white; overflow:hidden; }
     body.nebula { background: radial-gradient(circle at center, #2b0000, #0a0000); }
     body.ocean { background: linear-gradient(to bottom, #001f3f, #0074D9); }
     body.aurora { background: linear-gradient(to bottom, #2E0854, #00FFCC); }
@@ -23,81 +15,52 @@
     body.rose { background: linear-gradient(to bottom, #FF007F, #2b0000); }
     body.toxic { background: linear-gradient(to bottom, #39FF14, #0a0a0a); }
 
-    /* Background patterns */
-    body.grid { background-image: linear-gradient(#444 1px, transparent 1px),
-                                   linear-gradient(90deg, #444 1px, transparent 1px);
-                background-size: 40px 40px; }
-    body.dots { background-image: radial-gradient(circle, #444 2px, transparent 2px);
-                background-size: 40px 40px; }
-    body.lines { background-image: linear-gradient(#444 1px, transparent 1px);
-                 background-size: 40px 40px; }
+    body.grid { background-image: linear-gradient(#444 1px, transparent 1px), linear-gradient(90deg, #444 1px, transparent 1px); background-size:40px 40px; }
+    body.dots { background-image: radial-gradient(circle, #444 2px, transparent 2px); background-size:40px 40px; }
+    body.lines { background-image: linear-gradient(#444 1px, transparent 1px); background-size:40px 40px; }
 
-    /* Settings panel */
-    #settings {
-      position: fixed; top: 10px; left: 10px;
-      background: rgba(0,0,0,0.7);
-      padding: 15px;
-      border-radius: 8px;
-      z-index: 10;
-      width: 200px;
-    }
-    #settings h3 { margin: 0 0 10px; font-size: 16px; }
-    #settings select { width: 100%; margin-bottom: 10px; }
+    #settings { position:fixed; top:10px; left:10px; background:rgba(0,0,0,0.7); padding:15px; border-radius:8px; z-index:10; width:200px; }
+    #settings h3 { margin:0 0 10px; font-size:16px; }
+    #settings select { width:100%; margin-bottom:10px; }
 
-    /* Main UI */
-    #container { text-align: center; padding-top: 60px; }
-    #title { font-size: 48px; font-weight: bold; color: #ff7a00; text-shadow: 0 0 20px #ff4500; }
-    #tagline { font-size: 18px; opacity: 0.8; margin-bottom: 30px; }
+    #container { text-align:center; padding-top:60px; }
+    #title { font-size:48px; font-weight:bold; color:#ff7a00; text-shadow:0 0 20px #ff4500; }
+    #tagline { font-size:18px; opacity:0.8; margin-bottom:30px; }
 
-    .tile-container { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
-    .tile { width: 160px; height: 100px; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            cursor: pointer; transition: 0.2s; }
-    .tile:hover { background: rgba(255,255,255,0.15); transform: scale(1.05); }
-    .tile-icon { font-size: 28px; margin-bottom: 8px; }
+    .tile-container { display:flex; justify-content:center; gap:30px; margin-bottom:20px; }
+    .tile { width:160px; height:100px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px;
+            display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; transition:0.2s; }
+    .tile:hover { background:rgba(255,255,255,0.15); transform:scale(1.05); }
+    .tile-icon { font-size:28px; margin-bottom:8px; }
 
-    .section { display: none; padding: 20px; }
-    .active { display: block; }
+    .section { display:none; padding:20px; }
+    .active { display:block; }
 
-    .game-list { list-style: none; padding: 0; }
-    .game-list li { padding: 10px; margin: 5px; background: rgba(255,255,255,0.05);
-                    border-radius: 6px; cursor: pointer; }
-    .game-list li:hover { background: rgba(255,255,255,0.15); }
+    .game-list { list-style:none; padding:0; }
+    .game-list li { padding:10px; margin:5px; background:rgba(255,255,255,0.05); border-radius:6px; cursor:pointer; }
+    .game-list li:hover { background:rgba(255,255,255,0.15); }
 
-    iframe { width: 100%; height: 500px; border: none; margin-top: 20px; }
+    iframe { width:100%; height:500px; border:none; margin-top:20px; }
 
-    .addon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .addon { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; }
-    .addon h3 { margin: 0 0 10px; }
-    .addon button { margin-top: 10px; padding: 6px 12px; background: #ff0000; border: none;
-                    border-radius: 4px; color: white; cursor: pointer; }
+    .addon-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .addon { background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; }
+    .addon h3 { margin:0 0 10px; }
+    .addon button { margin-top:10px; padding:6px 12px; background:#ff0000; border:none; border-radius:4px; color:white; cursor:pointer; }
   </style>
 </head>
 <body class="nebula">
 
-  <!-- Settings Panel -->
+  <!-- Settings -->
   <div id="settings">
     <h3>Theme</h3>
     <select id="themeSelect">
-      <option value="nebula">Nebula</option>
-      <option value="ocean">Ocean</option>
-      <option value="aurora">Aurora</option>
-      <option value="midnight">Midnight</option>
-      <option value="void">Void</option>
-      <option value="sunset">Sunset</option>
-      <option value="forest">Forest</option>
-      <option value="crimson">Crimson</option>
-      <option value="rose">Rose</option>
-      <option value="toxic">Toxic</option>
+      <option value="nebula">Nebula</option><option value="ocean">Ocean</option><option value="aurora">Aurora</option>
+      <option value="midnight">Midnight</option><option value="void">Void</option><option value="sunset">Sunset</option>
+      <option value="forest">Forest</option><option value="crimson">Crimson</option><option value="rose">Rose</option><option value="toxic">Toxic</option>
     </select>
-
     <h3>Background</h3>
     <select id="bgSelect">
-      <option value="">Default</option>
-      <option value="grid">Grid</option>
-      <option value="dots">Dots</option>
-      <option value="lines">Lines</option>
+      <option value="">Default</option><option value="grid">Grid</option><option value="dots">Dots</option><option value="lines">Lines</option>
     </select>
   </div>
 
@@ -112,7 +75,7 @@
     </div>
   </div>
 
-  <!-- Games Section -->
+  <!-- Games -->
   <div id="games" class="section">
     <h2>Games</h2>
     <ul class="game-list">
@@ -124,7 +87,7 @@
     <iframe id="gameFrame"></iframe>
   </div>
 
-  <!-- Add-ons Section -->
+  <!-- Add-ons -->
   <div id="addons" class="section">
     <h2>Add-ons</h2>
     <div class="addon-grid">
@@ -134,4 +97,19 @@
       <div class="addon"><h3>Anti-Closing</h3><p>Blocks “Leave site?” popups.</p></div>
       <div class="addon"><h3>Search Engine</h3><p>Choose search engine.</p><button>Configure</button></div>
       <div class="addon"><h3>Tabs System</h3><p>Shows site URL and icon.</p></div>
-      <div class="addon"><h3>
+      <div class="addon"><h3>Ad Blocker</h3><p>Experimental ad blocking.</p></div>
+      <div class="addon"><h3>Quick Links</h3><p>Add personal bookmarks.</p><button>Configure</button></div>
+      <div class="addon"><h3>Dev Tools</h3><p>Open developer tools.</p><button>Launch</button></div>
+    </div>
+  </div>
+
+  <!-- Proxy -->
+  <div id="proxy" class="section">
+    <h2>Proxy Browser</h2>
+    <iframe src="proxy.html"></iframe>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active
