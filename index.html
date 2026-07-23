@@ -1,43 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Nova Network</title>
-  <style>
-    body { font-family: sans-serif; background: #121212; color: #fff; padding: 20px; }
-    ul { list-style: none; padding: 0; display: flex; gap: 10px; flex-wrap: wrap; }
-    li a {
-      padding: 8px 16px;
-      background: #252525;
-      color: #00d2ff;
-      text-decoration: none;
-      border-radius: 4px;
-      display: inline-block;
-    }
-    li a:hover { background: #333; }
-    iframe { border: none; margin-top: 15px; border-radius: 8px; }
-  </style>
-</head>
-<body>
+<h1>Nova Network</h1>
 
-  <ul id="game-list">Loading games...</ul>
+<ul>
+  <li><a href="clmarioparty.html" target="game-frame">Mario Party</a></li>
+  <li><a href="Bank Robbery.html" target="game-frame">Bank Robbery</a></li>
+  <li><a href="cheeserolling.html" target="game-frame">Cheese Rolling</a></li>
+</ul>
 
-  <iframe name="game-frame" width="800" height="600"></iframe>
+<iframe name="game-frame" Width="800" height="600" ></iframe>
 
-  <script>
-    // GitHub API endpoint for your repo's main directory
-    const repoApiUrl = 'https://api.github.com/repos/gooberaustin123-create/Nova-Network/contents/';
-
-    async function loadGames() {
-      const listElement = document.getElementById('game-list');
-      
-      try {
-        const response = await fetch(repoApiUrl);
-        const files = await response.json();
-        
-        // Clear loading text
-        listElement.innerHTML = '';
-
-        // Filter out index.html and only get other .html files
-        const gameFiles = files.filter(file => 
-          file.name.endsWith('.html') && file.name.toLowerCase() !== 'index.html'
