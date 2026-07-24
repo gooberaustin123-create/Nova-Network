@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <h1>Nova Network</h1>
 
 <ul id="gameList" style="display: none;">
@@ -9,10 +10,11 @@
 <iframe style="display: none;" id="game-frame" name="game-frame" width="800" height="600"></iframe>
 
 <button onclick="document.getElementById('gameList').style.display = 'block'; document.getElementById('game-frame').style.display = 'block';"; >Games</button>
+<button onclick="document.getElementById('Proxy').style.display = 'block'; document.getElementById('Close-Proxy').style.display = 'block';"; >Games</button>
 
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="Proxy" style="display: none;>
 <head>
+   <button onclick="document.getElementById('Proxy').style.display = 'none'; document.getElementById('Close-Proxy').style.display = 'none'"; >X</button>
     <meta charset="UTF-8">
     <title>Iframe Frame Proxy</title>
     <style>
