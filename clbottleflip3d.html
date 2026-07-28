@@ -1,1 +1,123 @@
-<html><head><base target="_blank"></head><body><div id="fr" data="<iframe width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/RobiFet/api@9073844f55c6522e389b3e2686c74ba94785092f/resources/static/bf.xml&amp;container=ig&quot; frameborder=&quot;0&quot; allowfullscreen></iframe>"><iframe width="100%" height="100%" src="https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/RobiFet/api@9073844f55c6522e389b3e2686c74ba94785092f/resources/static/bf.xml&amp;container=ig" frameborder="0" allowfullscreen=""></iframe></div>
+<!-- Language: HTML -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In-Memory Todo List with iframe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #todo-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        #todo-input {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #add-btn {
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        #todo-list {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+        }
+        #todo-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+        #todo-list li button {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        #todo-list li button:hover {
+            opacity: 0.8;
+        }
+        iframe {
+            display: block;
+            margin: 20px auto;
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Simple In-Memory Todo List</h1>
+
+<div id="todo-form">
+    <input type="text" id="todo-input" placeholder="Enter a new todo">
+    <button id="add-btn">Add</button>
+</div>
+
+<ul id="todo-list"></ul>
+
+<!-- Iframe included as requested -->
+<iframe srcdoc="<p>Welcome to the todo iframe!</p>" title="Todo Iframe"></iframe>
+
+<script>
+    // Initialize empty todo list array
+    let todos = [];
+
+    const input = document.getElementById("todo-input");
+    const addBtn = document.getElementById("add-btn");
+    const todoList = document.getElementById("todo-list");
+
+    function renderTodos() {
+        // Clear current list
+        todoList.innerHTML = "";
+        // Render each todo item
+        todos.forEach((todo, index) => {
+            const li = document.createElement("li");
+            li.textContent = todo;
+            
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.onclick = () => {
+                todos.splice(index, 1); // Remove item from array
+                renderTodos(); // Re-render list
+            };
+
+            li.appendChild(deleteBtn);
+            todoList.appendChild(li);
+        });
+    }
+
+    // Add new todo
+    addBtn.addEventListener("click", () => {
+        const value = input.value.trim();
+        if(value) {
+            todos.push(value);
+            input.value = "";
+            renderTodos();
+        }
+    });
+
+    // Allow pressing Enter to add todo
+    input.addEventListener("keypress", (e) => {
+        if(e.key === "Enter") {
+            addBtn.click();
+        }
+    });
+</script>
+
+</body>
+</html>
